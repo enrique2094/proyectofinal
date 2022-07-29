@@ -11,6 +11,10 @@ import * as USER_HELPERS from "./utils/userToken";
 import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
 import Signup from "./pages/Signup";
+import About from "./pages/About";
+import Gallery from "./pages/Gallery";
+import Contact from "./pages/Contact";
+
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -63,8 +67,11 @@ export default function App() {
           <Route key={route.path} path={route.path} element={route.element} />
         ))*/}
         <Route path="/" element={<HomePage />} />
-        <Route path="/auth/login" element={<LogIn />} />
-        <Route path="/auth/signup" element={<Signup />} />
+        <Route path="/signin" element={<LogIn />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </div>
   );
