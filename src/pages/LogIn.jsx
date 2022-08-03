@@ -13,6 +13,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
+
 export default function SimpleCard() {
   return (
     <Flex

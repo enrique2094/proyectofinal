@@ -16,11 +16,52 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { signup } from "../services/auth";
+import * as PATHS from "../utils/paths";
+import * as USER_HELPERS from "../utils/userToken";
+import { useNavigate } from "react-router-dom";
 
-export default function SignupCard() {
+export default function SignupCard({authenticate}) {
   const [showPassword, setShowPassword] = useState(false);
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+    
+  });
+  const { username, password, email } = form;
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    return setForm({ ...form, [name]: value });
+  }
+
+  function handleFormSubmission(event) {
+    event.preventDefault();
+    const credentials = {
+      username,
+      email,
+      password,
+    };
+    signup(credentials).then((res) => {
+      if (!res.status) {
+        // unsuccessful signup
+        console.error("Signup was unsuccessful: ", res);
+        return setError({
+          message: "Signup was unsuccessful! Please check the console.",
+        });
+      }
+      // successful signup
+      USER_HELPERS.setUserToken(res.data.accessToken);
+      authenticate(res.data.user);
+      navigate(PATHS.HOMEPAGE);
+    });
+  }
 
   return (
+    <form onSubmit={handleFormSubmission}>
     <Flex
       minH={'100vh'}
       align={'center'}
@@ -43,26 +84,20 @@ export default function SignupCard() {
           <Stack spacing={4}>
             <HStack>
               <Box>
-                <FormControl id="firstName" isRequired>
-                  <FormLabel>First Name</FormLabel>
-                  <Input type="text" />
-                </FormControl>
-              </Box>
-              <Box>
-                <FormControl id="lastName">
-                  <FormLabel>Last Name</FormLabel>
-                  <Input type="text" />
+                <FormControl id="Username" isRequired>
+                  <FormLabel>Username</FormLabel>
+                  <Input value={username} onChange={handleInputChange} name="username" type="text" />
                 </FormControl>
               </Box>
             </HStack>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input value={email} onChange={handleInputChange} name="email" type="email" />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? 'text' : 'password'} />
+                <Input value={password} onChange={handleInputChange} name="password" type={showPassword ? 'text' : 'password'} />
                 <InputRightElement h={'full'}>
                   <Button
                     variant={'ghost'}
@@ -76,6 +111,7 @@ export default function SignupCard() {
             </FormControl>
             <Stack spacing={10} pt={2}>
               <Button
+              type="submit"
                 loadingText="Submitting"
                 size="lg"
                 bg={'blue.400'}
@@ -95,5 +131,6 @@ export default function SignupCard() {
         </Box>
       </Stack>
     </Flex>
+    </form>
   );
 }

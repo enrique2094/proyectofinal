@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import LoadingComponent from "./components/Loading";
 import Navbar from "./components/Navbar/Navbar";
 import { getLoggedIn, logout } from "./services/auth";
@@ -19,6 +19,7 @@ import Contact from "./pages/Contact";
 export default function App() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const accessToken = USER_HELPERS.getUserToken();
@@ -48,6 +49,7 @@ export default function App() {
       }
       USER_HELPERS.removeUserToken();
       setIsLoading(false);
+      navigate("/auth/login")
       return setUser(null);
     });
   }
@@ -68,7 +70,7 @@ export default function App() {
         ))*/}
         <Route path="/" element={<HomePage />} />
         <Route path="/signin" element={<LogIn />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/signup" element={<Signup authenticate={authenticate}/>} />
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />

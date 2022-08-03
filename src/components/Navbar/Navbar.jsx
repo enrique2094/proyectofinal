@@ -25,9 +25,34 @@ import {
 import { Link as Enlace } from 'react-router-dom'
 import logo from '../../images/deflogo.png'
 
-export default function WithSubnavigation() {
+export default function WithSubnavigation(props) {
   const { isOpen, onToggle } = useDisclosure();
+  const {user, handleLogOut} = props;
 
+  {/* No inicio de sesion*/}
+  {!user && (
+    <>
+    <Link to="/auth/signup">
+      <Button type="primary">Signup</Button>
+      </Link>
+      <Link to="/auth/login">
+        <Button>Login</Button>
+      </Link>
+      </>
+  )}
+
+  {/* Si hay sesion*/}
+
+  {user && (
+    <>
+    <Link to="/profile">
+      {user?.username} {user?.email}
+      <img src={user?.url} className="avatar" alt="a" />
+      </Link>
+      <Button onClick={handleLogOut}>LogOut</Button>
+      </>
+  )}
+ 
   return (
     <Box>
       <Flex
