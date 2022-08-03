@@ -14,6 +14,7 @@ import Signup from "./pages/Signup";
 import About from "./pages/About";
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
+import ServiceOne from "./pages/ServiceOne"
 
 
 export default function App() {
@@ -74,6 +75,7 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/serviceone" element={<ServiceOne />} />
       </Routes>
     </div>
   );
