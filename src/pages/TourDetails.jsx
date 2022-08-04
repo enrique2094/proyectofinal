@@ -19,15 +19,12 @@ import {
 const TourEdit = () => {
     const { id } = useParams();
     const [place, setPlace] = useState ("")
-    const [description, setDescription] = useState ("")
     const [people, setPeople] = useState ("")
-    const [price, setPrice] = useState ("")
-    const [duration, setDuration] = useState ("")
     const [date, setDate] = useState ("")
     const [ allPlaces, setAllPlaces ] = useState([])
 
     useEffect(() =>{
-        fetch(`http://localhost:5005/api/all/${id}`)
+        fetch(`${process.env.REACT_APP_SERVER_URL}/all/${id}`)
         .then((datos) => datos.json())
         .then((allData) => {
         })
@@ -36,7 +33,7 @@ const TourEdit = () => {
 
     const handleSubmit = (event) =>{
         event.prevent.default()
-        fetch(`http://localhost:5005/api/all/${id}`, {
+        fetch(`${process.env.REACT_APP_SERVER_URL}/all/${id}`, {
         method: "PUT",     
     }) .then((datos) => datos.json())
         .then((allData) => {
@@ -71,17 +68,6 @@ const TourEdit = () => {
         }} 
             value= {place}
             onChange={(event) => setPlace(event.target.value)}
-          />
-          <Input
-            placeholder="Description"
-            bg={'gray.100'}
-            border={0}
-            color={'gray.500'}
-            _placeholder={{
-              color: 'gray.500'
-            }}
-            value= {description}
-            onChange={(event) => setDescription(event.target.value)}
           />
           <Input
             placeholder="People"

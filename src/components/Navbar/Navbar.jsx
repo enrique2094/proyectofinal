@@ -285,7 +285,7 @@ const NAV_ITEMS = [
     href: '/contact',
     },
   {
-      label: 'SERVICES',
+      label: 'TOUR SERVICES',
       href: '/serviceone',
       },
 ];

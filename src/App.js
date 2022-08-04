@@ -7,7 +7,6 @@ import routes from "./config/routes";
 import TourEdit from "./pages/TourDetails"
 import * as USER_HELPERS from "./utils/userToken";
 
-// Pages 
 
 import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";

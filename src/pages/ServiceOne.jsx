@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom'
 import { useNavigate, useParams } from "react-router-dom"
 import axios from 'axios'
-import {
+import { Select, 
     Box,
     Stack,
     Heading,
@@ -33,7 +33,7 @@ import {
 
     function handleSubmit (event) { 
         event.preventDefault()
-        axios.post(`${process.env.REACT_APP_SERVER_URL}/new`, {place, description, people, price, duration, date} )
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/new`, {place, people, duration, date} )
         .then(newService => {
             setAllPlaces([...allPlaces, newService.data])
             setPlace("")
@@ -78,15 +78,7 @@ import {
             </ListItem>
             <ListItem>
               <ListIcon as={CheckIcon} color="blue.400" />
-              { place.description}
-            </ListItem>
-            <ListItem>
-              <ListIcon as={CheckIcon} color="blue.400" />
               {place.people}
-            </ListItem>
-            <ListItem>
-              <ListIcon as={CheckIcon} color="blue.400" />
-              {place.price}
             </ListItem>
             <ListItem>
               <ListIcon as={CheckIcon} color="blue.400" />
@@ -150,31 +142,15 @@ import {
       </Stack>
       <Box as={'form'} mt={10}>
         <Stack spacing={4}>
-          <Input 
-            placeholder="Place"
-            bg={'gray.100'}
-            border={0}
-            color={'gray.500'}
-            _placeholder={{
-              color: 'gray.500'
-        }} 
-            value={place}
+        <Select value={place}
             name="place"
             onChange={(event) => setPlace(event.target.value)}
             required
-          />
-          <Input
-            placeholder="Description"
-            bg={'gray.100'}
-            border={0}
-            color={'gray.500'}
-            _placeholder={{
-              color: 'gray.500'
-            }}
-            value={description}
-              name="description"
-              onChange={(event) => setDescription(event.target.value)}
-          />
+            placeholder='Select Place'>
+        <option>Rockefeller Center</option>
+        <option>Empire State Building</option>
+        <option>World Trade Center</option>
+        </Select>
           <Input
             placeholder="People"
             bg={'gray.100'}
@@ -194,6 +170,7 @@ import {
             color={'gray.500'} 
             type="datetime-local"
             value={date}
+            name="date"
             onChange={(event) => setDate(event.target.value)}
           />
         </Stack>
