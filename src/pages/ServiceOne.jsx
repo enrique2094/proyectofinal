@@ -1,7 +1,9 @@
 import React from 'react'
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import axios from 'axios'
 import {
     Box,
-    Flex,
     Stack,
     Heading,
     Text,
@@ -9,15 +11,47 @@ import {
     Input,
     Button,
     SimpleGrid,
-    Avatar,
-    AvatarGroup,
-    useBreakpointValue,
-    IconProps,
-    Icon,
+    List,
+    ListItem,
+    ListIcon,
+    useColorModeValue,
   } from '@chakra-ui/react';
+    import { CheckIcon } from "@chakra-ui/icons" 
 
-const ServiceOne = () => {
-  return (<Box position={'relative'}>
+    const ServiceOne = (props) => {
+
+    const navigate = useNavigate()
+    const [place, setPlace] = useState ("")
+    const [description, setDescription] = useState ("")
+    const [people, setPeople] = useState ("")
+    const [price, setPrice] = useState ("")
+    const [duration, setDuration] = useState ("")
+    const [date, setDate] = useState (null)
+    const [ allPlaces, setAllPlaces ] = useState([])
+
+    function handleSubmit (event) { 
+        event.preventDefault()
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/new`, {place, description, people, price, duration, date} )
+        .then(newService => {
+            setAllPlaces([...allPlaces, newService.data])
+            setPlace("")
+            setDescription("")
+        }).catch(console.log())
+        
+    }
+
+    
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/all`)
+        .then(places => {
+            setAllPlaces(places.data)
+            console.log(places.data)
+        }).catch(console.log())
+    },[])
+
+  return (
+  
+  <Box position={'relative'}>
   <Container
     as={SimpleGrid}
     maxW={'7xl'}
@@ -25,47 +59,57 @@ const ServiceOne = () => {
     spacing={{ base: 10, lg: 32 }}
     py={{ base: 10, sm: 20, lg: 32 }}>
     <Stack spacing={{ base: 10, md: 20 }}>
+      <Stack  spacing={4} align={'center'} style={{ display: "flex", flexDirection: "column"}}>
       <Heading
-        lineHeight={1.1}
-        fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
-        Senior web designers{' '}
-        <Text
-          as={'span'}
-          bgGradient="linear(to-r, red.400,pink.400)"
-          bgClip="text">
-          &
-        </Text>{' '}
-        Full-Stack Developers
-      </Heading>
-      <Stack direction={'row'} spacing={4} align={'center'}>
-        <Text fontFamily={'heading'} fontSize={{ base: '4xl', md: '6xl' }}>
-          +
-        </Text>
-        <Flex
-          align={'center'}
-          justify={'center'}
-          fontFamily={'heading'}
-          fontSize={{ base: 'sm', md: 'lg' }}
-          bg={'gray.800'}
-          color={'white'}
-          rounded={'full'}
-          width={useBreakpointValue({ base: '44px', md: '60px' })}
-          height={useBreakpointValue({ base: '44px', md: '60px' })}
-          position={'relative'}
-          _before={{
-            content: '""',
-            width: 'full',
-            height: 'full',
-            rounded: 'full',
-            transform: 'scale(1.125)',
-            bgGradient: 'linear(to-bl, orange.400,yellow.400)',
-            position: 'absolute',
-            zIndex: -1,
-            top: 0,
-            left: 0,
-          }}>
-          YOU
-        </Flex>
+          color={'gray.800'}
+          lineHeight={1.1}
+          fontSize={{ base: '2xl', sm: '3xl', md: '4xl' }}>
+          Details of your tour here:
+        </Heading>
+{
+            allPlaces.map((place, index) => {
+                return <Box key={index} px={6} py={10}>
+
+          <List spacing={3}>
+            <ListItem>
+              <ListIcon as={CheckIcon} color="blue.400" />
+              {place.place}
+            </ListItem>
+            <ListItem>
+              <ListIcon as={CheckIcon} color="blue.400" />
+              { place.description}
+            </ListItem>
+            <ListItem>
+              <ListIcon as={CheckIcon} color="blue.400" />
+              {place.people}
+            </ListItem>
+            <ListItem>
+              <ListIcon as={CheckIcon} color="blue.400" />
+              {place.price}
+            </ListItem>
+            <ListItem>
+              <ListIcon as={CheckIcon} color="blue.400" />
+              {place.duration}
+            </ListItem>
+          </List>
+          <Button
+            mt={10}
+            w={'full'}
+            bg={'blue.400'}
+            color={'white'}
+            rounded={'xl'}
+            boxShadow={'0 5px 20px 0px rgb(72 187 120 / 43%)'}
+            _hover={{
+              bg: 'blue.500',
+            }}
+            _focus={{
+              bg: 'blue.500',
+            }}>
+            Start your trial
+          </Button>
+        </Box>
+ })
+}
       </Stack>
     </Stack>
     <Stack
@@ -79,63 +123,101 @@ const ServiceOne = () => {
           color={'gray.800'}
           lineHeight={1.1}
           fontSize={{ base: '2xl', sm: '3xl', md: '4xl' }}>
-          Join our team
-          <Text
-            as={'span'}
-            bgGradient="linear(to-r, red.400,pink.400)"
-            bgClip="text">
-            !
-          </Text>
+          Reserve your tour to your favorite attraction🗽
         </Heading>
         <Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
-          We’re looking for amazing engineers just like you! Become a part
-          of our rockstar engineering team and skyrocket your career!
+          We are looking for to provide you the best experience around The Big Apple🍎. Our options include: 
+          parks, neighborhoods, buildings, streets, avenues and much more!
         </Text>
       </Stack>
       <Box as={'form'} mt={10}>
         <Stack spacing={4}>
+          <Input 
+            placeholder="Place"
+            bg={'gray.100'}
+            border={0}
+            color={'gray.500'}
+            _placeholder={{
+              color: 'gray.500'
+        }} 
+            
+            value={place}
+            name="place"
+            onChange={(event) => setPlace(event.target.value)}
+            required
+          />
           <Input
-            placeholder="Firstname"
+            placeholder="Description"
+            bg={'gray.100'}
+            border={0}
+            color={'gray.500'}
+            _placeholder={{
+              color: 'gray.500'
+            }}
+            value={description}
+              name="description"
+              onChange={(event) => setDescription(event.target.value)}
+          />
+          <Input
+            placeholder="People"
+            bg={'gray.100'}
+            border={0}
+            color={'gray.500'}
+            _placeholder={{
+              color: 'gray.500'
+            }}
+            value={people}
+              name="people"
+              onChange={(event) => setPeople(event.target.value)}
+          />
+           <Input
+            placeholder="Price"
             bg={'gray.100'}
             border={0}
             color={'gray.500'}
             _placeholder={{
               color: 'gray.500',
             }}
+            value={price}
+              name="price"
+              onChange={(event) => setPrice(event.target.value)}
           />
-          <Input
-            placeholder="firstname@lastname.io"
+           <Input
+            placeholder="Duration"
             bg={'gray.100'}
             border={0}
             color={'gray.500'}
             _placeholder={{
               color: 'gray.500',
             }}
+            value={duration}
+              name="duration"
+              onChange={(event) => setDuration(event.target.value)}
           />
-          <Input
-            placeholder="+1 (___) __-___-___"
+          <Input 
+            placeholder="Date"
             bg={'gray.100'}
             border={0}
-            color={'gray.500'}
-            _placeholder={{
-              color: 'gray.500',
-            }}
+            color={'gray.500'} 
+            type="datetime-local"
+            value={date}
+            onChange={(event) => setDate(event.target.value)}
           />
-          <Button fontFamily={'heading'} bg={'gray.200'} color={'gray.800'}>
-            Upload CV
-          </Button>
         </Stack>
         <Button
           fontFamily={'heading'}
           mt={8}
           w={'full'}
-          bgGradient="linear(to-r, red.400,pink.400)"
+          bgGradient="linear(to-r, blue.400,blue.400)"
           color={'white'}
           _hover={{
-            bgGradient: 'linear(to-r, red.400,pink.400)',
+            bgGradient: 'linear(to-r, blue.400,blue.400)',
             boxShadow: 'xl',
-          }}>
-          Submit
+          }}
+          type="submit"
+          onClick={handleSubmit}
+          >
+          Create Tour
         </Button>
       </Box>
       form
@@ -144,5 +226,6 @@ const ServiceOne = () => {
 </Box>
   )
 }
+
 
 export default ServiceOne

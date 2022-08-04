@@ -39,7 +39,8 @@ function HomePage() {
             </Text>{' '}
           </Heading>
           <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.600'}>
-          Enjoy a tour from Uptown to Downtown visiting the most popular places in New York City
+          Enjoy a tour visiting the most popular places in 
+          New York City with the most professional tour guide🗽🍎🚕
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
           </Stack>

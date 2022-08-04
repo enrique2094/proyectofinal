@@ -76,6 +76,7 @@ export default function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/serviceone" element={<ServiceOne />} />
+        <Route path="/serviceone" element={<ServiceOne />} />
       </Routes>
     </div>
   );

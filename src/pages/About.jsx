@@ -49,7 +49,7 @@ export const BlogAuthor = (props) => {
 
 const About = () => {
   return (
-    <Container backgroundColor= "#609aeb" maxW={'7xl'} p="12">
+    <Container maxW={'7xl'} p="12">
       <Heading as= "h1">NYCByWalk</Heading>
       <Box
         marginTop={{ base: '1', sm: '5' }}

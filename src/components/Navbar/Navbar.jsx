@@ -116,7 +116,6 @@ export default function WithSubnavigation(props) {
           </Button>
         </Stack>
       </Flex>
-
       <Collapse in={isOpen} animateOpacity>
         <MobileNav />
       </Collapse>
@@ -285,4 +284,8 @@ const NAV_ITEMS = [
     label: 'CONTACT',
     href: '/contact',
     },
+  {
+      label: 'SERVICES',
+      href: '/serviceone',
+      },
 ];
