@@ -38,7 +38,7 @@ function HomePage() {
               Book your tour
             </Text>{' '}
           </Heading>
-          <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.600'}>
+          <Text fontSize={{ base: '6xl', lg: 'lg' }} color={'gray.600'}>
           Enjoy a tour visiting the most popular places in 
           New York City with the most professional tour guide🗽🍎🚕
           </Text>
@@ -47,11 +47,11 @@ function HomePage() {
         </Stack>
       </Flex>
       <Flex flex={1}>
-        <Image
+        <Image 
           alt={'Login Image'}
           objectFit={'cover'}
           src={
-            'https://wallpapercave.com/wp/wp4120945.jpg'
+            'https://wallpapercave.com/wp/wp4120945.jpg' 
           }
         />
       </Flex>

@@ -28,9 +28,15 @@ import {
   
   export default function contact() {
     return (
-      <Container backgroundImage="url(https://www.worldatlas.com/r/w960-q80/upload/ea/d1/c8/shutterstock-569566918.jpg)" backgroundPosition="center"
+      <Container 
+      backgroundImage="url(https://www.worldatlas.com/r/w960-q80/upload/ea/d1/c8/shutterstock-569566918.jpg)" 
+      backgroundPosition="center"
       backgroundRepeat="no-repeat"
-      backgroundSize="cover"maxW="full" mt={0} centerContent overflow="hidden">
+      backgroundSize="cover"
+      maxW="full" 
+      mt={0} 
+      centerContent 
+      overflow="hidden">
         <Flex>
           <Box
             bg="#1256b5" style= {{opacity: "0.9"}}

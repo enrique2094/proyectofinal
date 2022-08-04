@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from "react"
+import { Link } from 'react-router-dom'
 import { useNavigate, useParams } from "react-router-dom"
 import axios from 'axios'
 import {
@@ -17,6 +18,7 @@ import {
     useColorModeValue,
   } from '@chakra-ui/react';
     import { CheckIcon } from "@chakra-ui/icons" 
+    import TourDetails from './TourDetails'
 
     const ServiceOne = (props) => {
 
@@ -26,7 +28,7 @@ import {
     const [people, setPeople] = useState ("")
     const [price, setPrice] = useState ("")
     const [duration, setDuration] = useState ("")
-    const [date, setDate] = useState (null)
+    const [date, setDate] = useState ("")
     const [ allPlaces, setAllPlaces ] = useState([])
 
     function handleSubmit (event) { 
@@ -40,7 +42,6 @@ import {
         
     }
 
-    
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_SERVER_URL}/all`)
         .then(places => {
@@ -68,7 +69,7 @@ import {
         </Heading>
 {
             allPlaces.map((place, index) => {
-                return <Box key={index} px={6} py={10}>
+                return <Box key={place._id} px={6} py={10}>
 
           <List spacing={3}>
             <ListItem>
@@ -92,7 +93,8 @@ import {
               {place.duration}
             </ListItem>
           </List>
-          <Button
+          <Link to={`/tourdetails/${place._id}`}>
+          <Button 
             mt={10}
             w={'full'}
             bg={'blue.400'}
@@ -105,7 +107,23 @@ import {
             _focus={{
               bg: 'blue.500',
             }}>
-            Start your trial
+            Edit Tour
+          </Button>
+          </Link>
+          <Button
+            mt={10}
+            w={'full'}
+            bg={'red.400'}
+            color={'white'}
+            rounded={'xl'}
+            boxShadow={'0 5px 20px 0px rgb(72 187 120 / 43%)'}
+            _hover={{
+              bg: 'red.500',
+            }}
+            _focus={{
+              bg: 'red.500',
+            }}>
+            Delete Tour
           </Button>
         </Box>
  })
@@ -140,7 +158,6 @@ import {
             _placeholder={{
               color: 'gray.500'
         }} 
-            
             value={place}
             name="place"
             onChange={(event) => setPlace(event.target.value)}
@@ -170,30 +187,6 @@ import {
               name="people"
               onChange={(event) => setPeople(event.target.value)}
           />
-           <Input
-            placeholder="Price"
-            bg={'gray.100'}
-            border={0}
-            color={'gray.500'}
-            _placeholder={{
-              color: 'gray.500',
-            }}
-            value={price}
-              name="price"
-              onChange={(event) => setPrice(event.target.value)}
-          />
-           <Input
-            placeholder="Duration"
-            bg={'gray.100'}
-            border={0}
-            color={'gray.500'}
-            _placeholder={{
-              color: 'gray.500',
-            }}
-            value={duration}
-              name="duration"
-              onChange={(event) => setDuration(event.target.value)}
-          />
           <Input 
             placeholder="Date"
             bg={'gray.100'}
@@ -204,6 +197,7 @@ import {
             onChange={(event) => setDate(event.target.value)}
           />
         </Stack>
+        <Link to={`/tourdetails/${place._id}`}>
         <Button
           fontFamily={'heading'}
           mt={8}
@@ -219,6 +213,7 @@ import {
           >
           Create Tour
         </Button>
+        </Link>
       </Box>
       form
     </Stack>

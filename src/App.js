@@ -4,6 +4,7 @@ import LoadingComponent from "./components/Loading";
 import Navbar from "./components/Navbar/Navbar";
 import { getLoggedIn, logout } from "./services/auth";
 import routes from "./config/routes";
+import TourEdit from "./pages/TourDetails"
 import * as USER_HELPERS from "./utils/userToken";
 
 // Pages 
@@ -76,7 +77,7 @@ export default function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/serviceone" element={<ServiceOne />} />
-        <Route path="/serviceone" element={<ServiceOne />} />
+        <Route path="/tourdetails/:id" element={<TourEdit />} />
       </Routes>
     </div>
   );
