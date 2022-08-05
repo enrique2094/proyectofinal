@@ -69,8 +69,8 @@ export default function App() {
         {/*routes({ user, authenticate, handleLogout }).map((route) => (
           <Route key={route.path} path={route.path} element={route.element} />
         ))*/}
-        <Route path="/" element={<HomePage />} />
-        <Route path="/signin" element={<LogIn />} />
+        <Route path="/" element={<HomePage/>} />
+        <Route path="/signin" element={<LogIn authenticate={authenticate}/>} />
         <Route path="/signup" element={<Signup authenticate={authenticate}/>} />
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />

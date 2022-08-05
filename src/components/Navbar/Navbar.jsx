@@ -24,13 +24,14 @@ import {
 } from '@chakra-ui/icons';
 import { Link as Enlace } from 'react-router-dom'
 import logo from '../../images/deflogo.png'
+import React from 'react';
 
 export default function WithSubnavigation(props) {
   const { isOpen, onToggle } = useDisclosure();
   const {user, handleLogOut} = props;
 
   {/* No inicio de sesion*/}
-  {!user && (
+  {user && (
     <>
     <Link to="/auth/signup">
       <Button type="primary">Signup</Button>
@@ -272,10 +273,10 @@ const NAV_ITEMS = [
     label: 'HOME',
     href: '/',
    },
-      {
-        label: 'ABOUT',
-        href: '/about',
-      },
+    {
+     label: 'ABOUT',
+     href: '/about',
+    },
   {
     label: 'CUSTOMER GALLERY',
     href: '/gallery',

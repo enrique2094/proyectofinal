@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import {
     Box,
     Stack,
@@ -22,6 +23,17 @@ const TourEdit = () => {
     const [people, setPeople] = useState ("")
     const [date, setDate] = useState ("")
     const [ allPlaces, setAllPlaces ] = useState([])
+    const navi = useNavigate()
+
+    function deletePublication(){
+      fetch(`${process.env.REACT_APP_SERVER_URL}/ddelete/${id}`, {method:"delete"})
+      .then(data => data.json() )
+      .then( publicaciones => {
+       navi("/")
+      })
+      .catch(console.log)
+  
+    }
 
     useEffect(() =>{
         fetch(`${process.env.REACT_APP_SERVER_URL}/all/${id}`)
@@ -43,18 +55,12 @@ const TourEdit = () => {
 }
 
   return (
-    <Stack
-      bg={'gray.50'}
-      rounded={'xl'}
-      p={{ base: 4, sm: 6, md: 8 }}
-      spacing={{ base: 8 }}
-      maxW={{ lg: 'lg' }}>
       <Stack spacing={4}>
         <Heading
           color={'gray.800'}
           lineHeight={1.1}
           fontSize={{ base: '2xl', sm: '3xl', md: '4xl' }}>
-          Modify your tour to your favorite attraction🗽
+          Modify your tour🗽
         </Heading>
     <Box as={'form'} mt={10}>
         <Stack spacing={4}>
@@ -108,7 +114,6 @@ const TourEdit = () => {
         </Button>
       </Box>
       </Stack>
-    </Stack>
   )
 }
 
