@@ -26,7 +26,7 @@ const TourEdit = () => {
     const navi = useNavigate()
 
     function deletePublication(){
-      fetch(`${process.env.REACT_APP_SERVER_URL}/ddelete/${id}`, {method:"delete"})
+      fetch(`${process.env.REACT_APP_SERVER_URL}/delete/${id}`, {method:"delete"})
       .then(data => data.json() )
       .then( publicaciones => {
        navi("/")
@@ -36,16 +36,18 @@ const TourEdit = () => {
     }
 
     useEffect(() =>{
-        fetch(`${process.env.REACT_APP_SERVER_URL}/all/${id}`)
+        fetch(`${process.env.REACT_APP_SERVER_URL}/${id}`)
         .then((datos) => datos.json())
         .then((allData) => {
+          setPlace(allData.place)
+          (console.log(allData.place))
         })
         .catch(console.log());
     }, [])
 
     const handleSubmit = (event) =>{
         event.prevent.default()
-        fetch(`${process.env.REACT_APP_SERVER_URL}/all/${id}`, {
+        fetch(`${process.env.REACT_APP_SERVER_URL}/editour/${id}`, {
         method: "PUT",     
     }) .then((datos) => datos.json())
         .then((allData) => {

@@ -27,6 +27,7 @@ import { Select,
     const [people, setPeople] = useState ("")
     const [time, setTime] = useState ("")
     const [ allPlaces, setAllPlaces ] = useState([])
+    const navi = useNavigate()
 
     function handleSubmit (event) { 
         event.preventDefault()
@@ -39,6 +40,16 @@ import { Select,
             setPeople("")
         }).catch(console.log())
         
+    }
+
+    function deletePublication(id){
+      fetch(`${process.env.REACT_APP_SERVER_URL}/deletetour/${id}`, {method:"delete"})
+      .then(data => data.json() )
+      .then( publicaciones => {
+       navi("/")
+      })
+      .catch(console.log)
+  
     }
 
     useEffect(() => {
@@ -84,6 +95,40 @@ import { Select,
             {place.time}
           </ListItem>
         </List>
+        <Link to={`/tourdetails/${place._id}`}>
+        <Button
+            mt={10}
+            w={'full'}
+            bg={'blue.400'}
+            color={'white'}
+            rounded={'xl'}
+            boxShadow={'0 5px 20px 0px rgb(72 187 120 / 43%)'}
+            _hover={{
+              bg: 'blue.500',
+            }}
+            _focus={{
+              bg: 'blue.500',
+            }}>
+            Edit your tour
+          </Button>
+          </Link>
+          
+          <Button
+            mt={10}
+            w={'full'}
+            bg={'red.400'}
+            color={'white'}
+            rounded={'xl'}
+            onClick={ () => deletePublication(place._id)}
+            boxShadow={'0 5px 20px 0px rgb(72 187 120 / 43%)'}
+            _hover={{
+              bg: 'red.500',
+            }}
+            _focus={{
+              bg: 'red.500',
+            }}>
+            Delete your tour
+          </Button>
       </Box>
 })
 }
