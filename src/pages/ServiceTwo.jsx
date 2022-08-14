@@ -29,7 +29,7 @@ import {
 } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 
-const ServiceOne = (props) => {
+const ServiceTwo = (props) => {
   const [place, setPlace] = useState("");
   const [people, setPeople] = useState("");
   const [time, setTime] = useState("");
@@ -146,7 +146,7 @@ const ServiceOne = (props) => {
             </Heading>
             <Box px={6} py={10}>
               <TableContainer>
-                <Table variant="striped" colorScheme="blue">
+                <Table variant="striped" colorScheme="teal">
                   <Thead>
                     <Tr>
                       <Th>Place</Th>
@@ -178,7 +178,7 @@ const ServiceOne = (props) => {
                               <Button
                                 leftIcon={<DeleteIcon />}
                                 onClick={() => deleteData(item._id)}
-                                colorScheme="red"
+                                colorScheme="teal"
                                 size="xs"
                                 variant="outline"
                               >
@@ -307,4 +307,4 @@ const ServiceOne = (props) => {
   );
 };
 
-export default ServiceOne;
+export default ServiceTwo;

@@ -1,10 +1,7 @@
-// import logo from "../logo.svg";
 import "../App.css";
 import {
-  Button,
   Flex,
   Heading,
-  Avatar,
   Image,
   Stack,
   Text,
@@ -40,7 +37,7 @@ function HomePage() {
           </Heading>
           <Text fontSize={{ base: '6xl', lg: 'lg' }} color={'gray.600'}>
           Enjoy a tour visiting the most popular places in 
-          New York City with the most professional tour guide🗽🍎🚕
+          New York City with the most professional tour guide🏙🍎🚕
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
           </Stack>

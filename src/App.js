@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import LoadingComponent from "./components/Loading";
 import Navbar from "./components/Navbar/Navbar";
 import { getLoggedIn, logout } from "./services/auth";
-import routes from "./config/routes";
 import TourEdit from "./pages/TourDetails"
 import * as USER_HELPERS from "./utils/userToken";
 
@@ -15,6 +14,7 @@ import About from "./pages/About";
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import ServiceOne from "./pages/ServiceOne"
+import ServiceTwo from "./pages/ServiceTwo"
 
 
 export default function App() {
@@ -36,7 +36,7 @@ export default function App() {
     });
   }, []);
 
-  function handleLogout() {
+  const handleLogout = () => {
     const accessToken = USER_HELPERS.getUserToken();
     if (!accessToken) {
       setUser(null);
@@ -50,7 +50,7 @@ export default function App() {
       }
       USER_HELPERS.removeUserToken();
       setIsLoading(false);
-      navigate("/auth/login")
+      navigate("/signin")
       return setUser(null);
     });
   }
@@ -76,6 +76,7 @@ export default function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/serviceone" element={<ServiceOne />} />
+        <Route path="/servicetwo" element={<ServiceTwo />} />
         <Route path="/tourdetails/:id" element={<TourEdit />} />
       </Routes>
     </div>

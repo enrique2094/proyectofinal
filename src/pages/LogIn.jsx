@@ -73,7 +73,7 @@ export default function LogIn({ authenticate }) {
           p={8}>
           <Stack spacing={4}>
             <FormControl id="email">
-              <FormLabel>Email address</FormLabel>
+              <FormLabel>Username</FormLabel>
               <Input
                id="input-username"
                type="text"
