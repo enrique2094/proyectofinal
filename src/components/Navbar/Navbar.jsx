@@ -73,17 +73,32 @@ export default function WithSubnavigation(props) {
             <>
               <Button
                 fontSize={"sm"}
-                fontWeight={400}
-                variant={"link"}
+                fontWeight={600}
+                display={{ base: "none", md: "inline-flex" }}
+                color={"white"}
+                bg={"grey"}
+                href={"#"}
                 onClick={() => handleLogout()}
-              >
+                // variant={"link"}
+                _hover={{
+                  bg: "grey",
+                }}>
                 LOG OUT
               </Button>
             </>
           ) : (
             <>
-              <Button fontSize={"sm"} fontWeight={400} variant={"link"}>
-                <Enlace to={"/signin"}>Sign In</Enlace>
+              <Button 
+                display={{ base: "none", md: "inline-flex" }}
+                fontSize={"sm"}
+                fontWeight={600}
+                color={"white"}
+                bg={"blue.400"}
+                href={"#"}
+                _hover={{
+                  bg: "blue.300",
+                }}>
+                <Enlace to={"/signin"}>SIGN IN</Enlace>
               </Button>
               <Button
                 display={{ base: "none", md: "inline-flex" }}
@@ -96,7 +111,7 @@ export default function WithSubnavigation(props) {
                   bg: "blue.300",
                 }}
               >
-                <Enlace to={"/signup"}>Sign Up</Enlace>
+                <Enlace to={"/signup"}>SIGN UP</Enlace>
               </Button>
             </>
           )}

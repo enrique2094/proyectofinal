@@ -3,7 +3,6 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import LoadingComponent from "./components/Loading";
 import Navbar from "./components/Navbar/Navbar";
 import { getLoggedIn, logout } from "./services/auth";
-import TourEdit from "./pages/TourDetails"
 import * as USER_HELPERS from "./utils/userToken";
 
 
@@ -77,7 +76,6 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/serviceone" element={<ServiceOne />} />
         <Route path="/servicetwo" element={<ServiceTwo />} />
-        <Route path="/tourdetails/:id" element={<TourEdit />} />
       </Routes>
     </div>
   );

@@ -32,7 +32,6 @@ import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 const ServiceTwo = (props) => {
   const [place, setPlace] = useState("");
   const [people, setPeople] = useState("");
-  const [time, setTime] = useState("");
   const [placeId, setPlaceId] = useState(0);
   const [allPlaces, setAllPlaces] = useState([]);
   const [textButton, setTextButton] = useState("Create Tour");
@@ -44,10 +43,10 @@ const ServiceTwo = (props) => {
   const handleSubmit = () => {
     if (placeId) {
       axios
-        .put(`${process.env.REACT_APP_SERVER_URL}/editour/${placeId}`, {
+        .put(`${process.env.REACT_APP_SERVER_URL}/editourTwo/${placeId}`, {
           place,
           people,
-          time,
+          day,
         })
         .then(() => {
           //setAllPlaces([...allPlaces, newService.data]);
@@ -55,7 +54,7 @@ const ServiceTwo = (props) => {
             allPlaces.map((item) => {
               if (item._id === placeId) {
                 item.place = place;
-                item.time = time;
+                item.day = day;
                 item.people = people;
               }
               return item;
@@ -63,7 +62,7 @@ const ServiceTwo = (props) => {
           );
           setPlaceId(0);
           setPlace("");
-          setTime("");
+          setDay("");
           setPeople("");
           setTextButton("Create Tour");
 
@@ -74,15 +73,15 @@ const ServiceTwo = (props) => {
         .catch((e) => console.log(e));
     } else {
       axios
-        .post(`${process.env.REACT_APP_SERVER_URL}/new`, {
+        .post(`${process.env.REACT_APP_SERVER_URL}/newTwo`, {
           place,
           people,
-          time,
+          day,
         })
         .then((newService) => {
           setAllPlaces([...allPlaces, newService.data]);
           setPlace("");
-          setTime("");
+          setDay("");
           setPeople("");
           setTextButton("Create Tour");
 
@@ -98,13 +97,13 @@ const ServiceTwo = (props) => {
     setTextButton("Update Tour");
     setPlaceId(data._id);
     setPlace(data.place);
-    setTime(data.time);
+    setDay(data.day);
     setPeople(data.people);
   };
 
   const deleteData = (id) => {
     axios
-      .delete(`${process.env.REACT_APP_SERVER_URL}/deletetour/${id}`)
+      .delete(`${process.env.REACT_APP_SERVER_URL}/deletetourTwo/${id}`)
       .then((res) => {
         setAllPlaces(allPlaces.filter((item) => item._id !== id));
         setTitleModal('Record Deletion');
@@ -115,7 +114,7 @@ const ServiceTwo = (props) => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/all`)
+      .get(`${process.env.REACT_APP_SERVER_URL}/allTwo`)
       .then((places) => {
         setAllPlaces(places.data);
       })
@@ -146,11 +145,10 @@ const ServiceTwo = (props) => {
             </Heading>
             <Box px={6} py={10}>
               <TableContainer>
-                <Table variant="striped" colorScheme="teal">
+                <Table variant="striped" colorScheme="blue">
                   <Thead>
                     <Tr>
                       <Th>Place</Th>
-                      <Th>Time</Th>
                       <Th>Day</Th>
                       <Th isNumeric>People</Th>
                       <Th>Options</Th>
@@ -161,7 +159,6 @@ const ServiceTwo = (props) => {
                       return (
                         <Tr key={index}>
                           <Td>{item.place}</Td>
-                          <Td>{item.time}</Td>
                           <Td>{item.day}</Td>
                           <Td isNumeric>{item.people}</Td>
                           <Td>
@@ -178,7 +175,7 @@ const ServiceTwo = (props) => {
                               <Button
                                 leftIcon={<DeleteIcon />}
                                 onClick={() => deleteData(item._id)}
-                                colorScheme="teal"
+                                colorScheme="red"
                                 size="xs"
                                 variant="outline"
                               >
@@ -230,8 +227,6 @@ const ServiceTwo = (props) => {
                 <option>Times Square</option>
                 <option>Statue of Liberty</option>
               </Select>
-
-
               <Select
                 value={day}
                 name="day"
@@ -239,20 +234,12 @@ const ServiceTwo = (props) => {
                 required
                 placeholder="Select Day"
               >
-                <option value="Lunes">Lunes</option>
-                <option value="Martes">Martes</option>
-              </Select>
-
-
-              <Select
-                value={time}
-                name="time"
-                onChange={(event) => setTime(event.target.value)}
-                required
-                placeholder="Select Time"
-              >
-                <option value="Night time">Night time</option>
-                <option value="Day time">Day time</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
               </Select>
               <Input
                 placeholder="Number of People"
@@ -280,7 +267,7 @@ const ServiceTwo = (props) => {
                 boxShadow: "xl",
               }}
               onClick={() => handleSubmit()}
-              disabled={!place || !time || !people || !day }
+              disabled={!place || !people || !day }
             >
               {textButton}
             </Button>

@@ -32,7 +32,6 @@ import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 const ServiceOne = (props) => {
   const [place, setPlace] = useState("");
   const [people, setPeople] = useState("");
-  const [time, setTime] = useState("");
   const [placeId, setPlaceId] = useState(0);
   const [allPlaces, setAllPlaces] = useState([]);
   const [textButton, setTextButton] = useState("Create Tour");
@@ -47,7 +46,7 @@ const ServiceOne = (props) => {
         .put(`${process.env.REACT_APP_SERVER_URL}/editour/${placeId}`, {
           place,
           people,
-          time,
+          day,
         })
         .then(() => {
           //setAllPlaces([...allPlaces, newService.data]);
@@ -55,7 +54,7 @@ const ServiceOne = (props) => {
             allPlaces.map((item) => {
               if (item._id === placeId) {
                 item.place = place;
-                item.time = time;
+                item.day = day;
                 item.people = people;
               }
               return item;
@@ -63,7 +62,7 @@ const ServiceOne = (props) => {
           );
           setPlaceId(0);
           setPlace("");
-          setTime("");
+          setDay("");
           setPeople("");
           setTextButton("Create Tour");
 
@@ -77,12 +76,12 @@ const ServiceOne = (props) => {
         .post(`${process.env.REACT_APP_SERVER_URL}/new`, {
           place,
           people,
-          time,
+          day,
         })
         .then((newService) => {
           setAllPlaces([...allPlaces, newService.data]);
           setPlace("");
-          setTime("");
+          setDay("");
           setPeople("");
           setTextButton("Create Tour");
 
@@ -98,7 +97,7 @@ const ServiceOne = (props) => {
     setTextButton("Update Tour");
     setPlaceId(data._id);
     setPlace(data.place);
-    setTime(data.time);
+    setDay(data.day);
     setPeople(data.people);
   };
 
@@ -150,7 +149,6 @@ const ServiceOne = (props) => {
                   <Thead>
                     <Tr>
                       <Th>Place</Th>
-                      <Th>Time</Th>
                       <Th>Day</Th>
                       <Th isNumeric>People</Th>
                       <Th>Options</Th>
@@ -161,7 +159,6 @@ const ServiceOne = (props) => {
                       return (
                         <Tr key={index}>
                           <Td>{item.place}</Td>
-                          <Td>{item.time}</Td>
                           <Td>{item.day}</Td>
                           <Td isNumeric>{item.people}</Td>
                           <Td>
@@ -239,21 +236,16 @@ const ServiceOne = (props) => {
                 required
                 placeholder="Select Day"
               >
-                <option value="Lunes">Lunes</option>
-                <option value="Martes">Martes</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
               </Select>
 
 
-              <Select
-                value={time}
-                name="time"
-                onChange={(event) => setTime(event.target.value)}
-                required
-                placeholder="Select Time"
-              >
-                <option value="Night time">Night time</option>
-                <option value="Day time">Day time</option>
-              </Select>
+              
               <Input
                 placeholder="Number of People"
                 bg={"gray.100"}
@@ -280,7 +272,7 @@ const ServiceOne = (props) => {
                 boxShadow: "xl",
               }}
               onClick={() => handleSubmit()}
-              disabled={!place || !time || !people || !day }
+              disabled={!place || !people || !day }
             >
               {textButton}
             </Button>
