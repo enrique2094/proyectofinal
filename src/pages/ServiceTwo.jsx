@@ -66,8 +66,8 @@ const ServiceTwo = (props) => {
           setPeople("");
           setTextButton("Create Tour");
 
-          setTitleModal('Record edit');
-          setDescriptionModal('The record has been updated');
+          setTitleModal('Tour Edition');
+          setDescriptionModal('The tour has been updated ✅');
           onOpen();
         })
         .catch((e) => console.log(e));
@@ -85,8 +85,8 @@ const ServiceTwo = (props) => {
           setPeople("");
           setTextButton("Create Tour");
 
-          setTitleModal('Record created');
-          setDescriptionModal('The record has been created');
+          setTitleModal('Tour Creation');
+          setDescriptionModal('The record has been created ✅');
           onOpen();
         })
         .catch(console.log());
@@ -106,8 +106,8 @@ const ServiceTwo = (props) => {
       .delete(`${process.env.REACT_APP_SERVER_URL}/deletetourTwo/${id}`)
       .then((res) => {
         setAllPlaces(allPlaces.filter((item) => item._id !== id));
-        setTitleModal('Record Deletion');
-        setDescriptionModal('The record has been deleted');
+        setTitleModal('Tour Deletion');
+        setDescriptionModal('The tour has been deleted ✅');
         onOpen();
       });
   };
@@ -222,10 +222,13 @@ const ServiceTwo = (props) => {
                 required
                 placeholder="Select Place"
               >
-                <option>Central Park</option>
+                <option>Yankee Stadium</option>
                 <option>Empire State Building</option>
                 <option>Times Square</option>
                 <option>Statue of Liberty</option>
+                <option>Rockefeller Center</option>
+                <option>Grand Station</option>
+                <option>One World Trade Center</option>
               </Select>
               <Select
                 value={day}

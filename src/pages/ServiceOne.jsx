@@ -66,8 +66,8 @@ const ServiceOne = (props) => {
           setPeople("");
           setTextButton("Create Tour");
 
-          setTitleModal('Record edit');
-          setDescriptionModal('The record has been updated');
+          setTitleModal('Tour Edition');
+          setDescriptionModal('The tour has been updated ✅');
           onOpen();
         })
         .catch((e) => console.log(e));
@@ -85,8 +85,8 @@ const ServiceOne = (props) => {
           setPeople("");
           setTextButton("Create Tour");
 
-          setTitleModal('Record created');
-          setDescriptionModal('The record has been created');
+          setTitleModal('Tour Creation');
+          setDescriptionModal('The tour has been created ✅');
           onOpen();
         })
         .catch(console.log());
@@ -106,8 +106,8 @@ const ServiceOne = (props) => {
       .delete(`${process.env.REACT_APP_SERVER_URL}/deletetour/${id}`)
       .then((res) => {
         setAllPlaces(allPlaces.filter((item) => item._id !== id));
-        setTitleModal('Record Deletion');
-        setDescriptionModal('The record has been deleted');
+        setTitleModal('Tour Deletion');
+        setDescriptionModal('The tour has been deleted ✅');
         onOpen();
       });
   };
@@ -224,7 +224,10 @@ const ServiceOne = (props) => {
               >
                 <option>Central Park</option>
                 <option>Empire State Building</option>
-                <option>Times Square</option>
+                <option>Rockefeller Center</option>
+                <option>Brooklyn Bridge</option>
+                <option>Walk around Wall Street</option>
+                <option>Walk through LES, SOHO AND VILLAGES</option>
                 <option>Statue of Liberty</option>
               </Select>
 
