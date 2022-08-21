@@ -26,7 +26,7 @@ export default function LogIn({ authenticate }) {
     password: "",
   });
   const { username, password } = form;
-  const [error, setError] = useState(null);
+  const [ setError ] = useState(null);
   const navigate = useNavigate();
 
   function handleInputChange(event) {
