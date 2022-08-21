@@ -12,7 +12,6 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Link,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
@@ -30,7 +29,7 @@ export default function SignupCard({authenticate}) {
     
   });
   const { username, password, email } = form;
-  const [error, setError] = useState(null);
+  const [ setError] = useState(null);
   const navigate = useNavigate();
 
   function handleInputChange(event) {
