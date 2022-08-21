@@ -79,7 +79,6 @@ export default function WithSubnavigation(props) {
                 bg={"grey"}
                 href={"#"}
                 onClick={() => handleLogout()}
-                // variant={"link"}
                 _hover={{
                   bg: "grey",
                 }}>

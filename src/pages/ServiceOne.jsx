@@ -246,8 +246,6 @@ const ServiceOne = (props) => {
                 <option value="Friday">Friday</option>
                 <option value="Saturday">Saturday</option>
               </Select>
-
-
               
               <Input
                 placeholder="Number of People"
