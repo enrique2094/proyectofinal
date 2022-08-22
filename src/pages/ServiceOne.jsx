@@ -49,7 +49,6 @@ const ServiceOne = (props) => {
           day,
         })
         .then(() => {
-          //setAllPlaces([...allPlaces, newService.data]);
           setAllPlaces(
             allPlaces.map((item) => {
               if (item._id === placeId) {
@@ -230,7 +229,6 @@ const ServiceOne = (props) => {
                 <option>Walk through LES, SOHO AND VILLAGES</option>
                 <option>Statue of Liberty</option>
               </Select>
-
 
               <Select
                 value={day}

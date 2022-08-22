@@ -49,7 +49,6 @@ const ServiceTwo = (props) => {
           day,
         })
         .then(() => {
-          //setAllPlaces([...allPlaces, newService.data]);
           setAllPlaces(
             allPlaces.map((item) => {
               if (item._id === placeId) {
