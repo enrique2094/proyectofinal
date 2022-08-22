@@ -63,7 +63,7 @@ export default function LogIn({ authenticate }) {
         <Stack align={'center'}>
           <Heading fontSize={'4xl'}>Sign in to your account</Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
-            to start the road to fun <Link color={'blue.400'}>features</Link> ✌️
+            to start the road to fun ✌️
           </Text>
         </Stack>
         <Box
@@ -100,7 +100,6 @@ export default function LogIn({ authenticate }) {
                 direction={{ base: 'column', sm: 'row' }}
                 align={'start'}
                 justify={'space-between'}>
-                <Checkbox>Remember me</Checkbox>
               </Stack>
               <Button
                 bg={'blue.400'}
